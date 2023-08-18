@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
 from .models import Book, UserProfile, Institution, Category
 from .forms import DonationForm
 
-@login_required
+@login_required(login_url='login')
 def donate_book(request):
+    
     if request.method == 'POST':
         form = DonationForm(request.POST, request.FILES)
         if form.is_valid():
@@ -18,7 +23,7 @@ def donate_book(request):
 
 
 
-@login_required
+@login_required(login_url='login')
 def donate_to_institution(request):
     if request.method == 'POST':
         form = DonationForm(request.POST, request.FILES)
@@ -31,7 +36,7 @@ def donate_to_institution(request):
         form = DonationForm()
     return render(request, 'base/donate_to_institution.html', {'form': form})
 
-@login_required
+@login_required(login_url='login')
 def view_profile(request, username):
     user = get_object_or_404(UserProfile, user__username=username)
     return render(request, 'base/profile.html', {'user': user})
@@ -53,4 +58,46 @@ def all_books(request):
         books = books.order_by('author')
     context = {'books': books, 'categories': categories}
     return render(request, 'base/all_books.html', context)
+
+def signup(request):
+    page = 'register'
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit = False)
+            user.username = user.username.lower()
+            user.save
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'An error occurred while registering!')
+    context = {'form': form, 'page' : page}
+    return render(request, 'base/login_register.html', context)
+
+def loginPage(request):
+    page = 'login'
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'User does not exist')
+
+        user = authenticate(request, username = username, password = password)
+
+        if user is not None and user.is_authenticated:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Incorrect username or password')
+            
+    context = {'page': page}
+    return render(request, 'base/login_register.html', context)
+
+def logoutPage(request):
+    logout(request)
+    return redirect('home')
 
