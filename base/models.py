@@ -37,16 +37,9 @@ class Transaction(models.Model):
     receiver = models.ForeignKey(User, on_delete=models.CASCADE)
     transaction_date = models.DateTimeField(auto_now_add=True)
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
-    location = models.CharField(max_length=100, blank=True)
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True)
-
 class DonationRequest(models.Model):
     requester_user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     request_date = models.DateTimeField(auto_now_add=True)
     fulfilled = models.BooleanField(default=False)
-
 

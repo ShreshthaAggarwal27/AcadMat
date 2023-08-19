@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect  
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
-from .models import Book, UserProfile, Institution, Category
+from .models import Book, Institution, Category
 from .forms import DonationForm
 
 @login_required(login_url='login')
@@ -19,8 +19,8 @@ def donate_book(request):
             return redirect('home')  # Redirect to the home page or a success page
     else:
         form = DonationForm()
-    return render(request, 'base/donate_book.html', {'form': form})
-
+    context = {'form': form}
+    return render(request, 'base/donate_book.html', context)
 
 
 @login_required(login_url='login')
@@ -34,18 +34,21 @@ def donate_to_institution(request):
             return redirect('home')  # Redirect to the home page or a success page
     else:
         form = DonationForm()
-    return render(request, 'base/donate_to_institution.html', {'form': form})
+    context = {'form': form}
+    return render(request, 'base/donate_to_institution.html', context)
 
-@login_required(login_url='login')
-def view_profile(request, username):
-    user = get_object_or_404(UserProfile, user__username=username)
-    return render(request, 'base/profile.html', {'user': user})
+
+def user_profile(request, username):
+    user = User.objects.get(username = username)
+    context = {'user': user}
+    return render(request, 'base/profile.html', context)
+
 
 def home(request):
     books = Book.objects.filter(available=True)
     institutions = Institution.objects.all()
-    
-    return render(request, 'base/index.html', {'books': books, 'institutions': institutions})
+    context = {'books': books, 'institutions': institutions}
+    return render(request, 'base/index.html', context)
 
 
 def all_books(request):
@@ -59,6 +62,7 @@ def all_books(request):
     context = {'books': books, 'categories': categories}
     return render(request, 'base/all_books.html', context)
 
+
 def signup(request):
     page = 'register'
     form = UserCreationForm()
@@ -67,15 +71,16 @@ def signup(request):
         if form.is_valid():
             user = form.save(commit = False)
             user.username = user.username.lower()
-            user.save
+            user.save()
             login(request, user)
-            return redirect('home')
+            return redirect('profile', username = user.username)
         else:
             messages.error(request, 'An error occurred while registering!')
     context = {'form': form, 'page' : page}
     return render(request, 'base/login_register.html', context)
 
-def loginPage(request):
+
+def login_page(request):
     page = 'login'
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -90,14 +95,15 @@ def loginPage(request):
 
         if user is not None and user.is_authenticated:
             login(request, user)
-            return redirect('home')
+            return redirect('profile', username = user.username)
         else:
             messages.error(request, 'Incorrect username or password')
             
     context = {'page': page}
     return render(request, 'base/login_register.html', context)
 
-def logoutPage(request):
+
+def logout_page(request):
     logout(request)
     return redirect('home')
 

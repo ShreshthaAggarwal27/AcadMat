@@ -37,13 +37,16 @@
           </li>
         </ul>		  
       </div>
-      <form class="d-flex ms-auto search" role="login">
         {% if request.user.is_authenticated %}
+        <div class = "logout">
+          <a href="{% url 'profile' request.user.username %}" class="profile">Profile</a>
           <a href="{% url 'logout' %}" class="btn btn-primary login">Logout</a>
+        </div>
         {% else %}
+        <div class="login">
           <a href = "{% url 'login' %}" class="btn btn-primary login">Login</a>
+        </div>
         {% endif %}
-      </form>
 	  </div>
 	</nav>
 </body>

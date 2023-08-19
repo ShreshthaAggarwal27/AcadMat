@@ -4,9 +4,7 @@
     <title>User Profile</title>
 </head>
 <body>
-    <h1>{{ user.user.username }}'s Profile</h1>
-    <p>Bio: {{ user.bio }}</p>
-    <p>Location: {{ user.location }}</p>
-    <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+    {% include 'navbar.html' %}
+    <h1>{{ user.username.capitalize }}'s Profile</h1>
 </body>
 </html>
