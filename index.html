@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcadMat</title>
+    <link rel="stylesheet" href="index.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Borel&family=Edu+SA+Beginner&family=Josefin+Sans&family=Lumanosimo&family=Tektur&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Borel&family=Edu+SA+Beginner&family=Josefin+Sans:wght@400;700&family=Lumanosimo&family=Tektur&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Borel&family=Edu+SA+Beginner&family=Josefin+Sans:ital,wght@0,400;0,500;0,700;1,500&family=Lumanosimo&family=Tektur&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="header-container">
+        <header class="header">
+            <div class="left">
+                <picture>
+                    <source srcset="logo.jpg" media="(max-width: 100%)">
+                    <img src="logo.jpg" alt="Flowers">
+                </picture>
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li class="dropdown">
+                        <a href="#">Give away</a>
+                        <div class="dropdown-content">
+                            <a href="giveAwayBook.html">Books</a>
+                            <a href="giveAwayItems.html">Other Material</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Books</a>
+                        <div class="dropdown-content">
+                            <a href="#">Free Books</a>
+                            <a href="#">Priced Books</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Academic materials</a>
+                        <div class="dropdown-content">
+                            <a href="#">Free Materials</a>
+                            <a href="#">Priced Materials</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <div class="search">
+                <input type="text" name="search" id="search" placeholder="Search">
+            </div>
+            <a href="login.html" target="_blank" class="btn">Login</a>
+
+        </header>
+    </div>
+    <div class="background">
+        <picture>
+            <source srcset="background.jpg" media="(max-width: 100%)">
+            <img src="background.jpg" alt="Flowers">
+        </picture>
+        <div class="title">
+            <h4 style="font-size:4vw"><span>Bridging</span> The Gap<br> In <br>Academic <span>Resources</span></h4>
+            <button class="btn2">Join Us</button>
+        </div>
+        <div class="books">
+            <picture>
+                <source srcset="books.png" media="(max-width: 100%)">
+                <img src="books.png" alt="Flowers">
+            </picture>
+        </div>
+    </div>
+    <div class="rectangle-container">
+        <div class="rectangle">
+            <div class="overlay-text">
+                Breaking Financial<br>Barriers
+                <div><button class="btn3 read-more-btn" data-content="breaking-financial-content">Read More</button>
+                </div>
+            </div>
+            <picture>
+                <source srcset="img1.jpg" media="(max-width: 100%)">
+                <img src="img1.jpg" alt="Flowers">
+            </picture>
+        </div>
+        <div class="rectangle">
+            <div class="overlay-text">
+                Promoting Sustainable<br>Learning
+                <div><button class="btn3 read-more-btn" data-content="promoting-sustainable-content">Read More</button>
+                </div>
+
+            </div>
+            <picture>
+                <source srcset="img2.jpg" media="(max-width: 100%)">
+                <img src="img2.jpg" alt="Flowers">
+            </picture>
+        </div>
+        <div class="rectangle">
+            <div class="overlay-text">
+                Empowering Undeserved<br>Communities
+                <div><button class="btn3 read-more-btn" data-content="empowering-communities-content">Read More</button>
+                </div>
+            </div>
+            <picture>
+                <source srcset="img3.jpg" media="(max-width: 100%)">
+                <img src="img3.jpg" alt="Flowers">
+            </picture>
+        </div>
+    </div>
+    <div id="about" class="about">
+        <div class="content">
+            <h2>About Us</h2>
+            <h1>Our Mission</h1>
+            <p>ACADMAT's mission is to bridge the gap in academic resources, connecting surplus materials with those in
+                need. We believe in the transformative power of education and strive for a world where every student has
+                access to essential learning tools.</p>
+            <button class="btn4 learn-more-btn" data-content="about-content">Learn More</button>
+        </div>
+        <img src="img1.jpg" alt="">
+    </div>
+    <div id="vision" class="vision">
+        <div class="content">
+            <h2>What We Do</h2>
+            <h1>Our Vision</h1>
+            <p>ACADMAT envisions empowering education through revolutionary resource sharing. Our platform bridges the
+                gap between surplus and needy, fostering a generous collaborative community.</p>
+            <button class="btn5 learn-more-btn" data-content="vision-content">Learn More</button>
+        </div>
+        <img src="img1.jpg" alt="">
+    </div>
+
+    <div id="breaking-financial-content" class="popup-content" style="display: none;">
+        <h2>Breaking Financial Barriers</h2>
+        <p>We understand the challenges students face in obtaining expensive academic materials. By leveraging the
+            AcadMat platform, students can now access affordable, high-quality used textbooks and reference materials,
+            enabling them to pursue their academic dreams without the burden of exorbitant costs. Through our
+            initiative, we're breaking down financial barriers and fostering a level playing field for all learners.</p>
+    </div>
+    <div id="promoting-sustainable-content" class="popup-content" style="display: none;">
+        <h2>Promoting Sustainable Learning</h2>
+        <p>AcadMat is committed to promoting sustainable practices in education. With our focus on reusing and recycling
+            academic materials, we encourage sellers and donators to contribute to the circulation of knowledge,
+            reducing the demand for new book production and minimizing our environmental footprint. Together, we can
+            create a more sustainable future for generations to come.</p>
+    </div>
+    <div id="empowering-communities-content" class="popup-content" style="display: none;">
+        <h2>Empowering Undeserved Communities</h2>
+        <p>Our vision extends beyond just a platform for buying and selling books. A portion of the proceeds from every
+            transaction goes towards supporting educational outreach in underserved communities.</p>
+    </div>
+    <div id="about-content" class="popup-content" style="display: none;">
+        <h2>Our Mission</h2>
+        <p>
+
+            At ACADMAT, we believe in the transformative power of education and its ability to change lives. Our mission
+            is to bridge the gap in academic resources, connecting individuals who have surplus educational materials
+            with those who need them the most. We envision a world where no student is held back by the lack of access
+            to essential learning tools.
+
+        <h2>About Us</h2>
+
+        ACADMAT came with the vision of addressing the issue of unused academic resources going to waste and
+        students facing financial barriers to education. <br>
+
+        Our platform is designed to be a user-friendly and secure space where generous individuals can share their
+        surplus academic resources, such as textbooks, school bags, uniforms, and more. We aim to foster a
+        supportive community that believes in the power of sharing knowledge for the greater good. <br>
+
+        By connecting donors and recipients, we strive to create a sustainable ecosystem of resource sharing,
+        reducing waste, and promoting a circular economy in education. Together, we can make a difference in the
+        lives of students, educators, and our environment. <br>
+
+        Join us on this empowering journey of education, collaboration, and resource repurposing. Together, we can
+        build a brighter and more equitable future for every learner.</p>
+    </div>
+    <div id="vision-content" class="popup-content" style="display: none;">
+        <h2>Our Vision</h2>
+        <p>
+
+            At ACADMAT, our vision is to empower education by revolutionizing the way academic resources are shared and
+            accessed. We are committed to creating a platform that bridges the gap between those with surplus resources
+            and those in need, fostering a community built on collaboration and generosity.
+
+            <h2>What We Do</h2>
+
+            At ACADMAT, we provide a purposeful platform that allows individuals to repurpose their academic resources
+            for a greater cause. We understand that educational materials, like books, school bags, and uniforms, often
+            go unused after an academic session. Simultaneously, we recognize that many students and learners face
+            financial constraints that hinder their access to these essential resources. <br>
+
+            Our platform facilitates a seamless process for generous donors to list their surplus resources and connect
+            with recipients in need. Through our website, donors can share their materials with others, either for free
+            or at a lower price, creating a sustainable way of giving back to the community. <br>
+
+            For recipients, ACADMAT serves as a resource hub, where they can search for and acquire academic materials
+            that will enhance their learning journey. We aim to make education more accessible and equitable for all,
+            breaking down barriers and ensuring that no student is left behind due to the lack of necessary resources. <br>
+
+            By promoting resource sharing, ACADMAT strives to make a positive impact not only on education but also on
+            the environment. We are driven by the vision of a circular economy in education, where resources are
+            repurposed, reused, and given new life, contributing to a greener and more sustainable future. <br>
+
+            Join us in our mission to empower education, one shared resource at a time. Together, we can create a world
+            where knowledge knows no bounds and every learner has the tools they need to thrive. <br>
+        </p>
+    </div>
+
+    <div class="popup" id="popup">
+        <span class="popup-close" id="popup-close">&times;</span>
+        <div id="popup-inner"></div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

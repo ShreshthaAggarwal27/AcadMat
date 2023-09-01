@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institution Login</title>
+    <link rel="stylesheet" href="institution-login.css">
+</head>
+<body>
+    <div class="container">
+        <form class="login-form">
+            <img src="logo.jpg" alt="Logo" class="logo">
+            <h2>Institution Login</h2>
+            <input type="text" id="institutionName" name="institutionName" placeholder="Institution Name" required>
+            <input type="email" id="institutionEmail" name="institutionEmail" placeholder="Institution Email" required>
+            <input type="password" id="institutionPassword" name="institutionPassword" placeholder="Password" required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember"> Keep me signed in
+                </label>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script>src="institution-login.js"</script>
+</body>
+</html>
