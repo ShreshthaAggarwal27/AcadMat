@@ -2,15 +2,18 @@
 <html>
 <head>
     <title>Login</title>
+    <style>
+        .content {
+            margin-top: 60px; 
+        }
+    </style>
 </head>
 <body>
     {% include 'navbar.html' %}
 
-    {% block content %}
-
     {% if page == 'login' %}
 
-    <div>
+    <div class="content">
         <form method="POST" action="">
             {% csrf_token %}
 
@@ -29,7 +32,7 @@
 
     {% else %}
 
-    <div>
+    <div class="content">
         <form method="POST" action="">
             {% csrf_token %}
 
@@ -43,8 +46,6 @@
     </div>
 
     {% endif %}
-
-    {% endblock content %}
 </body>
 </html>
 

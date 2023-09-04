@@ -22,6 +22,21 @@ def donate_book(request):
     context = {'form': form}
     return render(request, 'base/donate_book.html', context)
 
+@login_required(login_url='login')
+def donate_material(request):
+    
+    if request.method == 'POST':
+        form = DonationForm(request.POST, request.FILES)
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.donor = request.user
+            book.save()
+            return redirect('home')  # Redirect to the home page or a success page
+    else:
+        form = DonationForm()
+    context = {'form': form}
+    return render(request, 'base/donate_material.html', context)
+
 
 @login_required(login_url='login')
 def donate_to_institution(request):

@@ -4,50 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AcadMat</title>
-    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg" data-bs-theme="light">
-	  <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src = "{% static 'images/Logo-3.png' %}" alt="AcadMat Logo" height="30%" width="30%" margin="0px"/></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item" id="home">  
-            <a class="nav-link text-primary-emphasis" role="button" aria-current="page" href="{% url 'home' %}">Home</a>
-          </li>
-          <li class="nav-item about">
-            <a class="nav-link text-primary-emphasis" href="#">About</a>
-          </li>
-          <li class="nav-item donate">
-            <a class="nav-link text-primary-emphasis" href="{% url 'donate_book' %}">Donate Books</a>
-          </li>		
-          <li class="nav-item free">
-            <a class="nav-link text-primary-emphasis" href="{% url 'all_books' %}">Books</a>
-          </li>		
-          <li class="nav-item buy">
-            <a class="nav-link text-primary-emphasis" href="#">Buy Book Sets</a>
-          </li>		
-          <li class="nav-item material">
-            <a class="nav-link text-primary-emphasis" href="#">Get Academic Material</a>
-          </li>
-        </ul>		  
-      </div>
-        {% if request.user.is_authenticated %}
-        <div class = "logout">
-          <a href="{% url 'profile' request.user.username %}" class="profile">Profile</a>
-          <a href="{% url 'logout' %}" class="btn btn-primary login">Logout</a>
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'images/Logo-3.png' %}" alt="Logo" width="75%">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="input-group ml-3 search-bar">
+            <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Search</button>
+            </div>
         </div>
-        {% else %}
-        <div class="login">
-          <a href = "{% url 'login' %}" class="btn btn-primary login">Login</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#About">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="giveawayDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Give Away
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="giveawayDropdown">
+                        <a class="dropdown-item" href="{% url 'donate_book' %}">Books</a>
+                        <a class="dropdown-item" href="#">Other Material</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="booksDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Books
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="booksDropdown">
+                        <a class="dropdown-item" href="{% url 'all_books' %}">Free Books</a>
+                        <a class="dropdown-item" href="{% url 'all_books' %}">Priced Books</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="academicMaterialDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Get Academic Material
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="academicMaterialDropdown">
+                        <a class="dropdown-item" href="#">Free Material</a>
+                        <a class="dropdown-item" href="#">Priced Material</a>
+                    </div>
+                </li>
+            </ul>
+            {% if request.user.is_authenticated %}
+            <div class="logout d-flex align-items-center">
+                <a href="{% url 'profile' user.username %}">
+                    <span class="greeting mr-1">Hello, {{ user.username.capitalize }}</span></a>
+                <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+            </div>        
+            {% else %}
+            <a class="btn btn-primary ml-2" href="{% url 'login' %}">Login</a>
+            {% endif %}
         </div>
-        {% endif %}
-	  </div>
-	</nav>
+    </nav>
+
+    <!-- Include Bootstrap and jQuery scripts at the end of the body for proper functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
