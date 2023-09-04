@@ -1,0 +1,40 @@
+body{
+    padding-top: 60px;
+}
+.navbar {
+    height: 75px;
+}
+.search-bar {
+    width: 300px;
+}
+.nav-links{
+    display: flex;
+    justify-content: space-around   ;
+    align-items: center;
+    right: 200rem;
+}
+ul{
+    display: flex;
+}
+.nav-link:hover{
+    color: white;
+}
+#home{
+    margin-left: -300px;
+}
+.nav-item{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.login{
+    margin-right: 7rem;
+}
+.logout{
+    margin: 0;
+    padding: auto;
+}
+.logout span{
+    font-size: 12px;
+    text-decoration: none;
+    color: black;
+}
