@@ -3,6 +3,10 @@ body{
 }
 .navbar {
     height: 75px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: top 0.3s; /* Add a smooth transition effect */
 }
 .search-bar {
     width: 300px;

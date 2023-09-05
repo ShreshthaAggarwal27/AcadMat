@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AcadMat</title>
     <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
@@ -20,7 +21,7 @@
     <a href="{% url 'signup' %}"><button class="btn btn-warning btn-outline-dark btn-lg register">Join Us</button></a>
   </div>
   <div class="rectangle-container">
-    <div class="rectangle">
+    <div class="rectangle" data-aos="fade-right">
         <div class="overlay-text">
             Breaking Financial<br>Barriers
             <div><button class="btn btn-outline-dark read-more-btn" data-content="breaking-financial-content">Read More</button>
@@ -31,7 +32,7 @@
             <img src="{% static 'images/financial-barriers.jpg' %}" alt="Image Showing a Man Breaking Financial Barriers">
         </picture>
     </div>
-    <div class="rectangle">
+    <div class="rectangle" data-aos="fade-up">
         <div class="overlay-text">
             Promoting Sustainable<br>Learning
             <div><button class="btn btn-outline-dark read-more-btn" data-content="promoting-sustainable-content">Read More</button>
@@ -43,7 +44,7 @@
             <img src="{% static 'images/promoting-sustainable-learning.jpg' %}" alt="Lending a Book">
         </picture>
     </div>
-    <div class="rectangle">
+    <div class="rectangle" data-aos="fade-left">
         <div class="overlay-text">
             Empowering Backward<br>Communities
             <div><button class="btn btn-outline-dark read-more-btn" data-content="empowering-communities-content">Read More</button>
@@ -55,7 +56,7 @@
         </picture>
     </div>
   </div>
-<div id="about" class="about">
+<div id="about" class="about" data-aos="flip-left">
   <div class="content">
       <h2>About Us</h2>
       <h1>Our Mission</h1>
@@ -67,7 +68,7 @@
   <img src="{% static 'images/mission.jpg' %}" alt="Mission">
 </div>
 <br>
-<div id="vision" class="vision">
+<div id="vision" class="vision" data-aos="flip-right">
   <div class="content">
       <h2>What We Do</h2>
       <h1>Our Vision</h1>
@@ -203,6 +204,7 @@
   </div>
 <script src="{% static 'js/main.js' %}"></script>
 <script src="{% static 'js/index.js' %}"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
