@@ -1,0 +1,12 @@
+{% autoescape off %}
+Welcome to AcadMat!
+Hello {{ name }},
+Please confirm your email by clicking on the following link:
+
+Click here to confirm your email address: http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+If you didn't request this confirmation, you can ignore this email.
+
+Thank you for choosing AcadMat!
+
+{% endautoescape %}
+

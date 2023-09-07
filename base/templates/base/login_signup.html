@@ -89,6 +89,7 @@
             <img src="{% static 'images/logo.jpeg' %}" alt="Logo" class="logo">
             <h2>Sign-Up</h2>
             <form class="login-form" method="POST" action="">
+                
                 {% csrf_token %}
                 <div class="form-group">
                     <input type="text" class="form-control" id="username" name="username" placeholder="Create A Username (use only letters and numbers)" Required>
