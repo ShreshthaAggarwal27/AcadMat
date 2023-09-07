@@ -1,6 +1,7 @@
 from django import forms
 from .models import Book, Institution
 
+
 class DonationForm(forms.ModelForm):
     donate_to_institution = forms.BooleanField(required=False, initial=False)
     
@@ -16,3 +17,4 @@ class DonationForm(forms.ModelForm):
             if not institutions:
                 raise forms.ValidationError("No institutions available for donation.")
         return cleaned_data
+

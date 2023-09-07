@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/signup.css' %}">
+    <style>
+        body{
+            background-image: url("{% static 'images/hero-bg.png' %}");
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    {% include 'messages.html' %}
+
+    {% if page == 'login' %}
+    
+
+    <div class="background" style="padding-top: 200px;">
+        <div class="left-block">
+            <h3>Welcome Back!</h3>
+            <p>To keep connected with us please login.</p>
+        </div>
+        <div class="right-block">
+            <img src="{% static 'images/logo.jpeg' %}" alt="Logo" class="logo">
+            <h2>Login</h2>
+            <form class="login-form mb-0" method="POST" action="">
+                {% csrf_token %}
+
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <div class="forgot-password">
+                <a href="#" id="forgot-password-link">Forgot password?</a>
+            </div>
+            <div class="reset-form hidden" id="reset-form">
+                <h2>Reset Password</h2>
+                <p>Enter your mobile number or email to reset your password:</p>
+                <form>
+                    <input type="text" id="reset-identifier" name="reset-identifier" placeholder="Mobile Number or Email" required>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="divider">
+                <hr>
+                <span>OR</span>
+                <hr>
+            </div>
+            <a href="#" class="social-button">
+            <img src="{% static 'images/google.png' %}" alt="Google Logo" class="social-logo">
+                Continue with Google
+            </a>
+            <div class="divider">
+                <hr>
+                <span>OR</span>
+                <hr>
+            </div>
+            <a href="institution-login.html" class="institution-login-button">Login as Institution</a>
+            <div class="divider">
+                <hr>
+                <span>OR</span>
+                <hr>
+            </div>
+            <div class="signup">
+                <h5>Haven't Signed Up yet?</h5>
+                <br>
+                <a class="btn btn-outline-dark pl-3 pr-3" href="{% url 'signup' %}">Sign Up</a>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/login.js' %}"></script>
+
+    {% else %}
+
+    <div class="background">
+        <div class="left-block">
+            <h3>Welcome to AcadMat!</h3>
+            <p>New User?, To join us please sign-up.</p>
+        </div>
+        <div class="right-block" style="margin-top: 400px;">
+            <img src="{% static 'images/logo.jpeg' %}" alt="Logo" class="logo">
+            <h2>Sign-Up</h2>
+            <form class="login-form" method="POST" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Create A Username (use only letters and numbers)" Required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name" Required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name" Required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email Address" Required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Create Your Password" Required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm Your Password" Required>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>  
+            </form>
+           
+            <div class="divider">
+                <hr>
+                <span>OR</span>
+                <hr>
+            </div>
+            <a href="#" class="social-button">
+                <img src="{% static 'images/google.png' %}" alt="Google Logo" class="social-logo">
+                    Continue with Google
+            </a>
+            <div class="divider">
+                <hr>
+                <span>OR</span>
+                <hr>
+            </div>
+            <div class="signup">
+                <h5>Already Signed Up yet?</h5>
+                <br>
+                <a class="btn btn-outline-dark pl-3 pr-3" href="{% url 'login' %}">Login</a>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/signup.js' %}"></script>
+
+    {% endif %}
+    </body>
+</html>

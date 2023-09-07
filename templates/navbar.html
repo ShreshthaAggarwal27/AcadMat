@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo.jpeg' %}">
     <link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -60,7 +61,7 @@
             {% if request.user.is_authenticated %}
             <div class="logout d-flex align-items-center">
                 <a href="{% url 'profile' user.username %}">
-                    <span class="greeting mr-1">Hello, {{ user.username.capitalize }}</span></a>
+                    <span class="greeting mr-1">Hello, {{ user.first_name.capitalize }}</span></a>
                 <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
             </div>        
             {% else %}

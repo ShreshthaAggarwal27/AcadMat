@@ -1,0 +1,177 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("{% static 'images/hero-bg.png' %}");
+}
+
+.left-block {
+     text-align: center;
+     margin-left: 0;
+     color: solid black;
+     font-size: 48px;
+     padding-right: 80px;
+    }
+    .left-block h3{
+    margin-top: 0;
+    margin-bottom: 2%;
+    font-family: 'Josefin Sans', sans-serif;
+}
+.left-block p{
+    font-size: 18px;
+    margin-top: 0px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.right-block {
+    border: 2px solid #333;
+    padding: 20px;
+    top: 100px;
+    margin: 20px;
+    background-color: white;
+    color: #333;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px; /* Adjust the width as needed */
+    height: auto;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left; /* Align labels to the left */
+}
+
+/* Update input styles */
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%; /* Make the inputs take up the available width */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.forgot-password {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#forgot-password-link {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.reset-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    display: none;
+}
+
+.reset-form h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.reset-form p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.reset-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.reset-form button {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.reset-form button:hover {
+    background-color: #0052a3;
+}
+
+.hidden{
+    display: none;
+}
+
+.social-button img{
+    height: 20px;
+    width: 20px;
+}
+.social-button {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+    border: 0.5px solid black;
+    color: black;
+    width: 60%;
+    padding: 10px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.institution-login-button {
+    display: block;
+    width: 90%;
+    margin-top: 20px;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .left-block {
+        display: none;
+    }
+
+    .right-block {
+        max-width: 100%;
+    }
+}

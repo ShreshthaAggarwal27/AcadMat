@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>User Profile</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
     <style>
         .content{
             margin-top: 60px;
@@ -11,7 +12,8 @@
 <body>
     {% include 'navbar.html' %}
     <div class="content">
-        <h1 >{{ user.username.capitalize }}'s Profile</h1>
+        {% include 'messages.html' %}
+        <h1 >{{ user.first_name.capitalize }}'s Profile</h1>
     </div>
 </body>
 </html>
