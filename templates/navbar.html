@@ -17,7 +17,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="input-group ml-3 search-bar">
-            <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+            <input type="text" class="form-control" placeholder="Search" aria-label="Search" id="search">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button">Search</button>
             </div>
@@ -36,7 +36,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="giveawayDropdown">
                         <a class="dropdown-item" href="{% url 'donate_book' %}">Books</a>
-                        <a class="dropdown-item" href="#">Other Material</a>
+                        <a class="dropdown-item" href="{% url 'donate_material' %}">Other Material</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown active">
@@ -44,8 +44,8 @@
                         Books
                     </a>
                     <div class="dropdown-menu" aria-labelledby="booksDropdown">
-                        <a class="dropdown-item" href="{% url 'all_books' %}">Free Books</a>
-                        <a class="dropdown-item" href="{% url 'all_books' %}">Priced Books</a>
+                        <a class="dropdown-item" href="{% url 'free_books' %}">Free Books</a>
+                        <a class="dropdown-item" href="{% url 'priced_books' %}">Priced Books</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown active">
@@ -53,8 +53,8 @@
                         Get Academic Material
                     </a>
                     <div class="dropdown-menu" aria-labelledby="academicMaterialDropdown">
-                        <a class="dropdown-item" href="#">Free Material</a>
-                        <a class="dropdown-item" href="#">Priced Material</a>
+                        <a class="dropdown-item" href="{% url 'free_material' %}">Free Material</a>
+                        <a class="dropdown-item" href="{% url 'priced_material' %}">Priced Material</a>
                     </div>
                 </li>
             </ul>

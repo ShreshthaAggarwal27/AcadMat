@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Free Books</title>
+    <link rel="stylesheet" href="{% static 'styles/free_books.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+</head>
+<body style="background-color: rgb(243, 247, 255); padding-top: 5rem;">
+    {% include 'navbar.html' %}
+    <!-- <div class="sorting-and-filtering">
+        <br>
+        <form method="get">
+            <label for="sort_by">Sort by:</label>
+            <select name="sort_by" id="sort_by">
+                <option value="title">Title</option>
+                <option value="author">Author</option> -->
+                <!-- Add more sorting options here -->
+            <!-- </select>
+            <button class="btn btn-outline-primary" type="submit">Sort</button>
+        </form>
+    </div> -->
+
+    <div class="home-container">
+        <div class="sorting-and-filtering">
+            <div class="categories-filtering">
+                <div class="heading">
+                    <br>
+                    <h4>Filters</h4>
+                    <hr id="first-hr">
+                </div>
+
+                <h6>Categories</h6>
+                <hr>
+            
+                <div class="toggle">
+                    <a href="#" id="toggleCategories"><img src = "{% static 'images/toggle.png' %}" width="5%" id="toggleIcon"></a>&nbsp;<a href="{% url 'free_books' %}">Books</a>
+                </div>
+            
+                <div id="categoriesContainer">
+                    <div id="visibleCategories" class="categories">
+                        {% for category in categories|slice:":5" %} {# Show top 5 categories #}
+                            <div class="categories">
+                                <a href="{% url 'free_material' %}?q={{category.name}}">{{category.name}}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="show-more" id="showMoreContainer">
+                        <a href="#" id="showMoreCategories">Show More</a>
+                    </div>
+                    <div id="additionalCategories" style="display: none;">
+                        {% for category in categories|slice:"5:" %} {# Display additional categories #}
+                            <div class="categories">
+                                <a href="{% url 'free_material' %}?q={{category.name}}">{{category.name}}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="show-more" id="showLessContainer" style="display: none;">
+                        <a href="#" id="showLessCategories">Show Less</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="date-filtering">
+                <h6>Latest Arrivals</h6>
+                <hr>
+                <label for="last30Days">
+                    <input type="checkbox" id="last30Days" name="dateFilter" value="30"> Last 30 Days
+                </label>
+                <br>
+                <label for="last90Days">
+                    <input type="checkbox" id="last90Days" name="dateFilter" value="90"> Last 90 Days
+                </label>
+                <br>
+                <label for="last150Days">
+                    <input type="checkbox" id="last150Days" name="dateFilter" value="150"> Last 150 Days
+                </label>
+            </div>
+            <hr>
+            <div class="categories-filtering">
+                <h6>Publications</h6>
+                <hr>
+            
+                <div class="toggle">
+                    <a href="#" id="toggleCategories"><img src = "{% static 'images/toggle.png' %}" width="5%" id="toggleIcon"></a>&nbsp;<a href="{% url 'free_books' %}">Book Publications</a>
+                </div>
+            
+                <div id="categoriesContainer">
+                    <div id="visibleCategories" class="categories">
+                        {% for item in material|slice:":5" %} {# Show top 5 categories #}
+                            <div class="categories">
+                                <a href="{% url 'free_books' %}?q={{book.publication}}">{{book.publication}}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="show-more" id="showMoreContainer">
+                        <a href="#" id="showMoreCategories">Show More</a>
+                    </div>
+                    <div id="additionalCategories" style="display: none;">
+                        {% for item in material|slice:"5:" %} {# Display additional categories #}
+                            <div class="categories">
+                                <a href="{% url 'free_books' %}?q={{book.publication}}">{{book.publication}}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="show-more" id="showLessContainer" style="display: none;">
+                        <a href="#" id="showLessCategories">Show Less</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="date-filtering">
+                <h6>Latest Arrivals</h6>
+                <hr>
+                {% for condition in unique_conditions %}
+                    <div class="categories">
+                        <a href="{% url 'free_books' %}?q={{ condition }}">{{ condition.capitalize }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr>
+        </div>
+        
+        
+        <div class="book-cards">
+            {% for item in material %}
+            {% if item.price == 0 %}
+            <div class="book-card">
+                <div  class="card-img-top">
+                    <img src="{{ item.images.url }}" alt="{{ item.name }}">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <div class="card-text">
+                        <p class="card-author"><span class="author">by </span>Company: {{ item.company }} | {{ item.donated_date|date:"j F, Y" }}</p>
+                        <p class="card-year">{{ item.age_group }}</p>
+                        <p class="card-condition">Condition: {{ item.condition.capitalize }}</p>
+                        <p class="card-price">Free</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <script src="{% static 'js/free_books.js' %}"></script>
+</body>
+</html>

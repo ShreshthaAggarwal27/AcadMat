@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giveaway Form</title>
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'images/favicon.png' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'styles/give_away_material.css' %}"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <form
+      class="giveaway-form"
+      method="POST"
+      action=""
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <h1>Give Away Material</h1>
+      <div class="form-content">
+        <fieldset class="material-details">
+          <legend>Item Details</legend>
+          <label for="name">Name of the Material <span>*</span></label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            required
+          />
+          <br />
+          <label for="company">Company</label><br />
+          <input
+            type="text"
+            id="company"
+            name="company"
+            placeholder="Company"
+          />
+
+          <label for="category">Categories<span>*</span></label>
+          <select id="category" name="category" required>
+            <option value="">Select category</option>
+            <option value="Bags">Bags</option>
+            <option value="Uniform">Uniform</option>
+            <option value="Stationery">Stationery</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <div id="otherCategory" style="display: none">
+            <label for="other_category">Other Category Name</label>
+            <input
+              type="text"
+              id="other_category"
+              name="category"
+              placeholder="Enter category name"
+            />
+          </div>
+
+          <label for="age_group">Age_group</label>
+          <select id="age_group" name="age_group">
+            <option value="">Select Age_group</option>
+            <option value="4 - 8">4 - 8</option>
+            <option value="9 - 12">9 - 12</option>
+            <option value="13 - 15">13 - 15</option>
+            <option value="16 - 18">16 - 18</option>
+            <option value="19 - 23">19 - 23</option>
+          </select>
+
+          <label for="images">Image of the Material <span>*</span></label>
+          <input
+            type="file"
+            id="images"
+            name="images"
+            accept="image/*"
+            required
+          />
+          <br /><br />
+          <label for="price">Price of the material <span>*</span></label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            placeholder="Price"
+            required
+          />
+
+          <label for="condition"
+            >Condition of the material <span>*</span></label
+          >
+          <select id="condition" name="condition" required>
+            <option value="">Select Condition</option>
+            <option value="new">New</option>
+            <option value="good">Good</option>
+            <option value="old">Old</option>
+          </select>
+          <br /><br />
+          <label for="description">Description of the material</label><br />
+          <textarea id="description" name="description" rows="4"></textarea>
+        </fieldset>
+      </div>
+
+      <div class="submit">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/give_away_material.js' %}"></script>
+    <script src="{% static 'js/give_away_material_JQuery.js' %}"></script>
+  </body>
+</html>

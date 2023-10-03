@@ -1,20 +1,22 @@
 from django import forms
-from .models import Book, Institution
+from .models import Book, BookCategory, Material, MaterialCategory
 
-
-class DonationForm(forms.ModelForm):
-    donate_to_institution = forms.BooleanField(required=False, initial=False)
-    
+class BookDonationForm(forms.ModelForm):
     class Meta:
         model = Book
-        fields = ['title', 'author', 'publication_year', 'description', 'condition', 'images']
+        fields = ['title', 'author', 'publication', 'edition', 'price', 'description', 'condition', 'images', 'level', 'grade_year']
 
-    def clean(self):
-        cleaned_data = super().clean()
-        donate_to_institution = cleaned_data.get("donate_to_institution")
-        if donate_to_institution:
-            institutions = Institution.objects.all()
-            if not institutions:
-                raise forms.ValidationError("No institutions available for donation.")
-        return cleaned_data
+class BookCategoryForm(forms.ModelForm):
+    class Meta:
+        model = BookCategory
+        fields = ['name']
 
+class MaterialDonationForm(forms.ModelForm):
+    class Meta:
+        model = Material
+        fields = ['name', 'company', 'age_group', 'images', 'price', 'condition', 'description']
+
+class MaterialCategoryForm(forms.ModelForm):
+    class Meta:
+        model = MaterialCategory
+        fields = ['name']

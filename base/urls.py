@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -12,7 +15,14 @@ urlpatterns = [
     path('profile/<str:username>/', views.user_profile, name='profile'),
 
     path('donate_book/', views.donate_book, name='donate_book'),
-    path('donate_to_institution/', views.donate_to_institution, name='donate_to_institution'),
-    path('all_books/', views.all_books, name='all_books'),
+    path('donate_material/', views.donate_material, name='donate_material'),
+    #path('donate_to_institution/', views.donate_to_institution, name='donate_to_institution'),
+    path('free_books/', views.free_books, name='free_books'),
+    path('priced_books/', views.priced_books, name='priced_books'),
+    path('free_material/', views.free_material, name='free_material'),
+    path('priced_material/', views.priced_material, name='priced_material'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

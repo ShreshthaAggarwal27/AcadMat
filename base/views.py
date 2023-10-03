@@ -10,54 +10,72 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_str, force_bytes
 from django.contrib.auth import authenticate, login, logout
 from .tokens import generate_token
-from .models import Book, Institution, Category
-from .forms import DonationForm
-
+from .models import Book, Institution, BookCategory, Material, MaterialCategory
+from .forms import BookDonationForm, BookCategoryForm, MaterialDonationForm, MaterialCategoryForm
+import logging
 
 @login_required(login_url='login')
 def donate_book(request):
-    
     if request.method == 'POST':
-        form = DonationForm(request.POST, request.FILES)
+        form = BookDonationForm(request.POST, request.FILES)
+        category_form = BookCategoryForm(request.POST)  
+
         if form.is_valid():
             book = form.save(commit=False)
+
+            category_name = request.POST.get('category')
+            category, created = BookCategory.objects.get_or_create(name=category_name)
+
+            book.category = category
             book.donor = request.user
             book.save()
-            return redirect('home')  # Redirect to the home page or a success page
+            messages.success(request, "Added the book on the site!")
+            return redirect('home') 
     else:
-        form = DonationForm()
-    context = {'form': form}
-    return render(request, 'base/donate_book.html', context)
+        form = BookDonationForm()
+        category_form = BookCategoryForm()
+
+    context = {'form': form, 'category_form': category_form}
+    return render(request, 'base/give_away_book.html', context)
 
 @login_required(login_url='login')
 def donate_material(request):
-    
     if request.method == 'POST':
-        form = DonationForm(request.POST, request.FILES)
+        form = MaterialDonationForm(request.POST, request.FILES)
+        category_form = MaterialCategoryForm(request.POST)  
+
         if form.is_valid():
-            book = form.save(commit=False)
-            book.donor = request.user
-            book.save()
-            return redirect('home')  # Redirect to the home page or a success page
+            item = form.save(commit=False)
+
+            category_name = request.POST.get('category')
+            category, created = MaterialCategory.objects.get_or_create(name=category_name)
+
+            item.category = category
+            item.donor = request.user
+            item.save()
+            messages.success(request, "Added the item on the site!")
+            return redirect('home') 
     else:
-        form = DonationForm()
-    context = {'form': form}
-    return render(request, 'base/donate_material.html', context)
+        form = MaterialDonationForm()
+        category_form = MaterialCategoryForm()
+
+    context = {'form': form, 'category_form': category_form}
+    return render(request, 'base/give_away_material.html', context)
 
 
-@login_required(login_url='login')
-def donate_to_institution(request):
-    if request.method == 'POST':
-        form = DonationForm(request.POST, request.FILES)
-        if form.is_valid():
-            book = form.save(commit=False)
-            book.donor = request.user
-            book.save()
-            return redirect('home')  # Redirect to the home page or a success page
-    else:
-        form = DonationForm()
-    context = {'form': form}
-    return render(request, 'base/donate_to_institution.html', context)
+# @login_required(login_url='login')
+# def donate_to_institution(request):
+#     if request.method == 'POST':
+#         form = DonationForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             book = form.save(commit=False)
+#             book.donor = request.user
+#             book.save()
+#             return redirect('home')  # Redirect to the home page or a success page
+#     else:
+#         form = DonationForm()
+#     context = {'form': form}
+#     return render(request, 'base/donate_to_institution.html', context)
 
 
 def user_profile(request, username):
@@ -73,16 +91,45 @@ def home(request):
     return render(request, 'base/index.html', context)
 
 
-def all_books(request):
+def free_books(request):
     books = Book.objects.filter(available=True)
-    categories = Category.objects.all()
+    categories = BookCategory.objects.all()
     sort_by = request.GET.get('sort_by')
     if sort_by == 'title':
         books = books.order_by('title')
     elif sort_by == 'author':
         books = books.order_by('author')
-    context = {'books': books, 'categories': categories}
-    return render(request, 'base/all_books.html', context)
+    unique_conditions = set()
+    for book in books:
+        unique_conditions.add(book.condition)
+    context = {'books': books, 'categories': categories, 'unique_conditions': unique_conditions}
+    return render(request, 'base/free_books.html', context)
+
+def priced_books(request):
+    books = Book.objects.filter(available=True)
+    categories = BookCategory.objects.all()
+    sort_by = request.GET.get('sort_by')
+    if sort_by == 'title':
+        books = books.order_by('title')
+    elif sort_by == 'author':
+        books = books.order_by('author')
+    unique_conditions = set()
+    for book in books:
+        unique_conditions.add(book.condition)
+    context = {'books': books, 'categories': categories, 'unique_conditions': unique_conditions}
+    return render(request, 'base/priced_books.html', context)
+
+def free_material(request):
+    material = Material.objects.filter(available=True)
+    categories = MaterialCategory.objects.all()
+    context = {'material': material, 'categories': categories}
+    return render(request, 'base/free_material.html', context)
+
+def priced_material(request):
+    material = Material.objects.filter(available=True)
+    categories = MaterialCategory.objects.all()
+    context = {'material': material, 'categories': categories}
+    return render(request, 'base/priced_material.html', context)
 
 
 def signup(request):

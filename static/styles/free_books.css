@@ -1,0 +1,162 @@
+body {
+    background-color: rgb(243, 247, 255);
+    padding-top: 5rem;
+    margin: 0;
+}
+.sorting-and-filtering{
+    display: block;
+    width: 80%;
+    height: auto;
+    margin-left: 0.5rem;
+    margin-right: 0.75rem;
+    background-color: white;
+}
+#first-hr{
+    border-width: 20px;
+}
+.sorting-and-filtering .heading{
+    margin-left: -0.20rem;
+    color: rgb(0, 0, 0);
+    color: white;
+    background: linear-gradient(to right, #2f7fff 40%, white 100%); /* Gradient background color */
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0;
+}
+.sorting-and-filtering .heading h4, .sorting-and-filtering h6{
+    margin-left: 1.5rem;
+}
+.sorting-and-filtering h6{
+    font-weight: 750;
+}
+#toggleCategories{
+    text-decoration: none;
+    color: black;
+}
+.heading{
+    margin-left: 20px;
+}
+.categories, .date-filtering input{
+    margin-left: 40px;
+    margin-top: 2px;
+}
+.categories a{
+    color:black;
+}
+.categories a:hover{
+    text-decoration: none;
+    color: black;
+}
+.categories a:first-child {
+    font-weight:300;
+}
+.categories a.active {
+    background-color: #007bff;
+    color: white;
+    font-weight:300;
+    border-radius: 5px;
+    padding: 3px 8px;
+}
+.home-container{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    margin: 0 auto;
+}
+.book-cards{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    margin-left: 0;
+    grid-gap: 20px; /* Add spacing between book cards */
+}
+.book-card {
+    width: 350px;
+    height: auto;
+    max-height: 430px;
+    padding: 10px;
+    margin: 5px;
+    position: relative; 
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    border-color: black;
+    border: 1px solid #ddd;
+}
+.book-card:hover{
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1; 
+}
+   
+.book-card .card-img-top{
+    width: 330px;
+    height: 175px;
+    margin: 0;
+}
+.book-card img {
+    width: 100%;
+    height: 175px;
+    object-fit:scale-down;
+}
+
+.book-card .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+}
+
+.book-card .card-text {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.book-card .card-author {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #555;
+}
+
+.book-card .card-year {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #555;
+}
+
+.book-card .card-price {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #00a000;
+    font-weight: bold;
+}
+.show-more a, .show-less a, .toggle {
+    margin-left: 40px;
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+.toggle a{
+    color: #000000;
+}
+.show-more a:hover, .show-less a:hover {
+    padding-top: 5px;
+    color: #0056b3;
+}
+
+.show-more, #additionalCategories{
+    margin-left: 40px;
+}
+
+#toggleCategories {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+#toggleIcon {
+    transform: rotate(0deg);
+}
