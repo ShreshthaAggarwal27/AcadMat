@@ -89,7 +89,7 @@
                     <div id="visibleCategories" class="categories">
                         {% for book in books|slice:":5" %} {# Show top 5 categories #}
                             <div class="categories">
-                                <a href="{% url 'free_books' %}?q={{book.publication}}">{{book.publication}}</a>
+                                <a href="{% url 'free_books' %}?publication={{book.publication}}">{{book.publication}}</a>
                             </div>
                         {% endfor %}
                     </div>
@@ -99,7 +99,7 @@
                     <div id="additionalCategories" style="display: none;">
                         {% for book in books|slice:"5:" %} {# Display additional categories #}
                             <div class="categories">
-                                <a href="{% url 'free_books' %}?q={{book.publication}}">{{book.publication}}</a>
+                                <a href="{% url 'free_books' %}?publication={{book.publication}}">{{book.publication}}</a>
                             </div>
                         {% endfor %}
                     </div>
@@ -110,11 +110,11 @@
             </div>
             <hr>
             <div class="date-filtering">
-                <h6>Latest Arrivals</h6>
+                <h6>Conditions</h6>
                 <hr>
                 {% for condition in unique_conditions %}
                     <div class="categories">
-                        <a href="{% url 'free_books' %}?q={{ condition }}">{{ condition.capitalize }}</a>
+                        <a href="{% url 'free_books' %}?condition={{ condition }}">{{ condition.capitalize }}</a>
                     </div>
                 {% endfor %}
             </div>

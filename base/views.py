@@ -92,7 +92,17 @@ def home(request):
 
 
 def free_books(request):
-    books = Book.objects.filter(available=True)
+    category_name = request.GET.get('q')
+    publication_name = request.GET.get('publication')
+    condition = request.GET.get('condition')
+    if category_name:
+        books = Book.objects.filter(category__name=category_name, available=True)
+    elif publication_name:
+        books = Book.objects.filter(publication=publication_name, available=True)
+    elif condition:
+        books = Book.objects.filter(condition=condition, available=True)
+    else:
+        books = Book.objects.filter(available=True)
     categories = BookCategory.objects.all()
     sort_by = request.GET.get('sort_by')
     if sort_by == 'title':
@@ -106,7 +116,17 @@ def free_books(request):
     return render(request, 'base/free_books.html', context)
 
 def priced_books(request):
-    books = Book.objects.filter(available=True)
+    category_name = request.GET.get('q')
+    publication_name = request.GET.get('publication')
+    condition = request.GET.get('condition')
+    if category_name:
+        books = Book.objects.filter(category__name=category_name, available=True)
+    elif publication_name:
+        books = Book.objects.filter(publication=publication_name, available=True)
+    elif condition:
+        books = Book.objects.filter(condition=condition, available=True)
+    else:
+        books = Book.objects.filter(available=True)
     categories = BookCategory.objects.all()
     sort_by = request.GET.get('sort_by')
     if sort_by == 'title':
@@ -120,15 +140,50 @@ def priced_books(request):
     return render(request, 'base/priced_books.html', context)
 
 def free_material(request):
-    material = Material.objects.filter(available=True)
+    category_name = request.GET.get('q')
+    company_name = request.GET.get('company')
+    condition = request.GET.get('condition')
+    if category_name:
+        material = Material.objects.filter(category__name=category_name, available=True)
+    elif company_name:
+        material = Material.objects.filter(company=company_name, available=True)
+    elif condition:
+        material = Material.objects.filter(condition=condition, available=True)
+    else:
+        material = Material.objects.filter(available=True)
+
     categories = MaterialCategory.objects.all()
-    context = {'material': material, 'categories': categories}
+    unique_conditions = set()
+
+    for item in material:
+        cleaned_condition = item.condition.strip().lower()
+        unique_conditions.add(cleaned_condition)
+
+    context = {'material': material, 'categories': categories, 'unique_conditions': unique_conditions}
     return render(request, 'base/free_material.html', context)
 
 def priced_material(request):
-    material = Material.objects.filter(available=True)
+    category_name = request.GET.get('q')
+    company_name = request.GET.get('company')
+    condition = request.GET.get('condition')
+
+    if category_name:
+        material = Material.objects.filter(category__name=category_name, available=True)
+    elif company_name:
+        material = Material.objects.filter(company=company_name, available=True)
+    elif condition:
+        material = Material.objects.filter(condition=condition, available=True)
+    else:
+        material = Material.objects.filter(available=True)
+
     categories = MaterialCategory.objects.all()
-    context = {'material': material, 'categories': categories}
+    unique_conditions = set()
+
+    for item in material:
+        cleaned_condition = item.condition.strip().lower()
+        unique_conditions.add(cleaned_condition)
+
+    context = {'material': material, 'categories': categories, 'unique_conditions': unique_conditions}
     return render(request, 'base/priced_material.html', context)
 
 

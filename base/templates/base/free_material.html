@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-    <title>Free Books</title>
+    <title>Free Material</title>
     <link rel="stylesheet" href="{% static 'styles/free_books.css' %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
 </head>
@@ -34,7 +34,7 @@
                 <hr>
             
                 <div class="toggle">
-                    <a href="#" id="toggleCategories"><img src = "{% static 'images/toggle.png' %}" width="5%" id="toggleIcon"></a>&nbsp;<a href="{% url 'free_books' %}">Books</a>
+                    <a href="#" id="toggleCategories"><img src = "{% static 'images/toggle.png' %}" width="5%" id="toggleIcon"></a>&nbsp;<a href="{% url 'free_material' %}">Material</a>
                 </div>
             
                 <div id="categoriesContainer">
@@ -82,15 +82,17 @@
                 <hr>
             
                 <div class="toggle">
-                    <a href="#" id="toggleCategories"><img src = "{% static 'images/toggle.png' %}" width="5%" id="toggleIcon"></a>&nbsp;<a href="{% url 'free_books' %}">Book Publications</a>
+                    <a href="#" id="toggleCategories"><img src = "{% static 'images/toggle.png' %}" width="5%" id="toggleIcon"></a>&nbsp;<a href="{% url 'free_books' %}">Company</a>
                 </div>
             
                 <div id="categoriesContainer">
                     <div id="visibleCategories" class="categories">
                         {% for item in material|slice:":5" %} {# Show top 5 categories #}
+                            {% if item.company != None %}
                             <div class="categories">
-                                <a href="{% url 'free_books' %}?q={{book.publication}}">{{book.publication}}</a>
+                                <a href="{% url 'free_material' %}?company={{item.company}}">{{item.company}}</a>
                             </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                     <div class="show-more" id="showMoreContainer">
@@ -98,9 +100,11 @@
                     </div>
                     <div id="additionalCategories" style="display: none;">
                         {% for item in material|slice:"5:" %} {# Display additional categories #}
+                            {% if item.company != None %}
                             <div class="categories">
-                                <a href="{% url 'free_books' %}?q={{book.publication}}">{{book.publication}}</a>
+                                <a href="{% url 'free_material' %}?company={{item.company}}">{{item.company}}</a>
                             </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                     <div class="show-more" id="showLessContainer" style="display: none;">
@@ -110,11 +114,11 @@
             </div>
             <hr>
             <div class="date-filtering">
-                <h6>Latest Arrivals</h6>
+                <h6>Conditions</h6>
                 <hr>
                 {% for condition in unique_conditions %}
                     <div class="categories">
-                        <a href="{% url 'free_books' %}?q={{ condition }}">{{ condition.capitalize }}</a>
+                        <a href="{% url 'free_material' %}?condition={{ condition }}">{{ condition.capitalize }}</a>
                     </div>
                 {% endfor %}
             </div>
@@ -125,15 +129,29 @@
         <div class="book-cards">
             {% for item in material %}
             {% if item.price == 0 %}
-            <div class="book-card">
+            <div class="book-card" data-category="{{ book.category.name }}">
                 <div  class="card-img-top">
                     <img src="{{ item.images.url }}" alt="{{ item.name }}">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ item.name }}</h5>
+                    <h5 class="card-title">{{ item.name.capitalize }}</h5>
                     <div class="card-text">
-                        <p class="card-author"><span class="author">by </span>Company: {{ item.company }} | {{ item.donated_date|date:"j F, Y" }}</p>
-                        <p class="card-year">{{ item.age_group }}</p>
+                        <p class="card-author"><span class="author">by </span>{% if item.company != None %} 
+                                                                                    Company: {{ item.company }} 
+                                                                              {% else %}
+                                                                                    Company: Generic
+                                                                              {% endif %} | {{ item.donated_date|date:"j F, Y" }}</p>
+                        <p class="card-year">{% if item.age_group == 'group1' %}
+                                                Age: 4 - 8 yrs
+                                            {% elif item.age_group == 'group2' %}
+                                                Age: 9 - 12 yrs
+                                            {% elif item.age_group == 'group3' %}
+                                                Age: 13 - 15 yrs
+                                            {% elif item.age_group == 'group4' %}
+                                                Age: 16 - 18 yrs
+                                            {% elif item.age_group == 'group5' %}
+                                                Age: 19 - 23 yrs
+                                            {% endif %}</p>
                         <p class="card-condition">Condition: {{ item.condition.capitalize }}</p>
                         <p class="card-price">Free</p>
                     </div>
@@ -143,6 +161,6 @@
             {% endfor %}
         </div>
     </div>
-    <script src="{% static 'js/free_books.js' %}"></script>
+    <script src="{% static 'js/free_material.js' %}"></script>
 </body>
 </html>

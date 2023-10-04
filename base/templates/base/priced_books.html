@@ -34,14 +34,14 @@
                 <hr>
             
                 <div class="toggle">
-                    <a href="#" id="toggleCategories"><img src = "{% static 'images/toggle.png' %}" width="5%" id="toggleIcon"></a>&nbsp;<a href="{% url 'free_books' %}">Books</a>
+                    <a href="#" id="toggleCategories"><img src = "{% static 'images/toggle.png' %}" width="5%" id="toggleIcon"></a>&nbsp;<a href="{% url 'priced_books' %}">Books</a>
                 </div>
             
                 <div id="categoriesContainer">
                     <div id="visibleCategories" class="categories">
                         {% for category in categories|slice:":5" %} {# Show top 5 categories #}
                             <div class="categories">
-                                <a href="{% url 'free_books' %}?q={{category.name}}">{{category.name}}</a>
+                                <a href="{% url 'priced_books' %}?q={{category.name}}">{{category.name}}</a>
                             </div>
                         {% endfor %}
                     </div>
@@ -51,7 +51,7 @@
                     <div id="additionalCategories" style="display: none;">
                         {% for category in categories|slice:"5:" %} {# Display additional categories #}
                             <div class="categories">
-                                <a href="{% url 'free_books' %}?q={{category.name}}">{{category.name}}</a>
+                                <a href="{% url 'priced_books' %}?q={{category.name}}">{{category.name}}</a>
                             </div>
                         {% endfor %}
                     </div>
@@ -82,14 +82,14 @@
                 <hr>
             
                 <div class="toggle">
-                    <a href="#" id="toggleCategories"><img src = "{% static 'images/toggle.png' %}" width="5%" id="toggleIcon"></a>&nbsp;<a href="{% url 'free_books' %}">Book Publications</a>
+                    <a href="#" id="toggleCategories"><img src = "{% static 'images/toggle.png' %}" width="5%" id="toggleIcon"></a>&nbsp;<a href="{% url 'priced_books' %}">Book Publications</a>
                 </div>
             
                 <div id="categoriesContainer">
                     <div id="visibleCategories" class="categories">
                         {% for book in books|slice:":5" %} {# Show top 5 categories #}
                             <div class="categories">
-                                <a href="{% url 'free_books' %}?q={{book.publication}}">{{book.publication}}</a>
+                                <a href="{% url 'priced_books' %}?publication={{book.publication}}">{{book.publication}}</a>
                             </div>
                         {% endfor %}
                     </div>
@@ -99,7 +99,7 @@
                     <div id="additionalCategories" style="display: none;">
                         {% for book in books|slice:"5:" %} {# Display additional categories #}
                             <div class="categories">
-                                <a href="{% url 'free_books' %}?q={{book.publication}}">{{book.publication}}</a>
+                                <a href="{% url 'priced_books' %}?publication={{book.publication}}">{{book.publication}}</a>
                             </div>
                         {% endfor %}
                     </div>
@@ -110,11 +110,11 @@
             </div>
             <hr>
             <div class="date-filtering">
-                <h6>Latest Arrivals</h6>
+                <h6>Conditions</h6>
                 <hr>
                 {% for condition in unique_conditions %}
                     <div class="categories">
-                        <a href="{% url 'free_books' %}?q={{ condition }}">{{ condition.capitalize }}</a>
+                        <a href="{% url 'priced_books' %}?condition={{ condition }}">{{ condition.capitalize }}</a>
                     </div>
                 {% endfor %}
             </div>
@@ -135,7 +135,7 @@
                         <p class="card-author"><span class="author">by </span>Author: {{ book.author }} | {{ book.donated_date|date:"j F, Y" }}</p>
                         <p class="card-year">{{ book.grade_year }}</p>
                         <p class="card-condition">Condition: {{ book.condition.capitalize }}</p>
-                        <p class="card-price">Free</p>
+                        <p class="card-price">Price: ₹{{ book.price }}</p>
                     </div>
                 </div>
             </div>
