@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect  
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -80,8 +81,31 @@ def donate_material(request):
 
 def user_profile(request, username):
     user = User.objects.get(username = username)
-    context = {'user': user}
+    book_donations = Book.objects.filter(donor = user)
+    material_donations = Material.objects.filter(donor = user)
+    book_donations_count = book_donations.count()
+    material_donations_count = material_donations.count()
+    context = {'user': user, 
+               'book_donations': book_donations,
+               'material_donations': material_donations,
+               'book_donations_count': book_donations_count, 
+               'material_donations_count':material_donations_count}
     return render(request, 'base/profile.html', context)
+
+@login_required(login_url='login')
+def update_profile(request):
+    if request.method == 'POST':
+        user = request.user
+        user.first_name = request.POST.get('first-name')
+        user.last_name = request.POST.get('last-name')
+        user.city = request.POST.get('city')
+        user.phone_number = request.POST.get('phone-number')
+        user.email = request.POST.get('email')
+        user.save()  # Save the updated user data
+        messages.success(request, "Profile updated successfully!")
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False})
+
 
 
 def home(request):

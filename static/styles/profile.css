@@ -1,0 +1,228 @@
+.body{
+    padding: 30px;
+}
+
+.background-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -10;
+    height: 300px;
+    overflow: hidden;
+}
+
+.background-cover img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover;
+}
+
+
+.main-content {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* Adjust column ratios as needed */
+    grid-gap: 20px;
+}
+
+.left-column,
+.right-column {
+    border-radius: 10px;
+    background-color: white;
+    border: 0.1px solid rgb(96, 96, 96);
+    margin: 20px;
+    margin-top: 70px;
+    padding: 20px;
+    height: auto;
+}
+
+.profile-photo{
+    display: block;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    z-index: -1;
+}
+
+.profile-name{
+    text-align: center;
+    font-size: large;
+    margin-top: 7%;
+}
+
+.profile{
+    text-align: center;
+    font-size: medium;
+    color: #ccc;
+}
+
+.profile-link{
+    text-decoration: none;
+}
+
+.profile-link:hover{
+    text-decoration: none;
+}
+
+.donations-count hr {
+    margin-top: 20px; 
+}
+
+.donations-count h5 {
+    font-size: medium;
+    text-align: left;
+    color: rgb(84, 84, 84);
+    margin-left: 5%;
+}
+
+.donations-count .text-1{
+    margin-right: 45%;
+}
+
+.donations-count .text-2{
+    margin-right: 39%;
+}
+
+.donations-count .count {
+    color: orange;
+    font-size: medium; 
+    display: inline-block;
+    margin-top: 5px; 
+    margin-right: 10%;
+}
+
+.internal-navbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-content:flex-start;
+    width: 100%;
+}
+
+.internal-navbar li {
+    margin: 0 30px; /* Add left and right margins to create spacing */
+}
+
+/* Remove link underlines and change link color */
+.internal-navbar a {
+    text-decoration: none;
+    color: #666; /* Grey link color */
+    transition: color 0.2s;/* Use the parent element's color */
+}
+
+.navbar a:hover {
+    color: #000; /* Black link color on hover */
+}
+
+.navbar a:active {
+    color: #000; /* Black link color when clicked */
+}
+
+/* HR tag styles */
+.navbar-hr {
+    border: none;
+    height: 1px; /* Set the height of the hr */
+    background-color: #ccc; /* Grey hr color */
+    margin: 10px 0; /* Margin above and below hr */
+    position: relative;
+}
+
+/* Blue part of the hr */
+.navbar-hr::after {
+    content: "";
+    position: absolute;
+    top: 50%; /* Position at the middle of the hr */
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #007BFF; /* Blue hr color */
+}
+/* CSS to style the active link */
+.internal-navbar a.active {
+    color: blue;
+}
+#profile-form label{
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 3%;
+}
+
+.clicked{
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#books-donated {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+
+.book-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.book-card {
+    flex-basis: calc(25% - 20px); /* 25% width for each card with 20px gap */
+    max-width: 350px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: transform 0.2s ease-in-out;
+}
+
+.book-card:hover{
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1; 
+}
+   
+.book-card .card-img-top{
+    width: 330px;
+    height: 175px;
+    margin: 0;
+}
+.book-card img {
+    width: 100%;
+    height: 175px;
+    object-fit:scale-down;
+}
+
+.book-card .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+}
+
+.book-card .card-text {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.book-card .card-author {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #555;
+}
+
+.book-card .card-year {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #555;
+}
+
+.book-card .card-price {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #00a000;
+    font-weight: bold;
+}

@@ -3,7 +3,9 @@
 <html>
 <head>
     <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .content{
             margin-top: 60px;
@@ -14,7 +16,122 @@
     {% include 'navbar.html' %}
     <div class="content">
         {% include 'messages.html' %}
-        <h1 >{{ user.first_name.capitalize }}'s Profile</h1>
     </div>
+    <div class="background-cover">
+        <img src="{% static 'images/hero-bg.png' %}" alt="dark-blue-background">
+    </div>
+    <div class="main-content">
+        <div class="left-column">
+            <img src="{% static 'images/user-profile.png' %}" class="profile-photo"/>
+            <h3 class="profile-name">{{ user.first_name.capitalize }} {{ user.last_name.capitalize }}</h3>
+            <a href="{% url 'profile' user.username %}" class="profile-link"><h5 class="profile">Profile</h5></a>
+            <div class="donations-count">
+                <hr>
+                <h5><span class="text-1">Books Donated </span><span class="count">{{ book_donations_count }}</span></h5>
+            </div>
+            <div class="donations-count">
+                <hr>
+                <h5><span class="text-2">Material Donated </span><span class="count">{{ material_donations_count }}</span></h5>
+            </div>
+        </div>
+        <div class="right-column">
+            <ul class="internal-navbar">
+                <li><a href="#" onclick="showContent('personal-details')" class="clicked">Personal Details</a></li>
+                <li><a href="#" onclick="showContent('books-donated')" class="clicked">Books Donated</a></li>
+                <li><a href="#" onclick="showContent('material-donated')" class="clicked">Material Donated</a></li>
+            </ul>
+            <hr>
+            <!-- Initially, display the Personal Details section -->
+            <div id="personal-details" class="content-section">
+                <form id="profile-form">
+                    <div>
+                        <label for="username" class="form-label">Username:</label>
+                        <input type="text" id="username" name="username" class="form-control" value="{{ user.username }}">
+                    </div>
+                    <div>
+                        <label for="first-name" class="form-label">First Name:</label>
+                        <input type="text" id="first-name" name="first-name" class="form-control" value="{{ user.first_name.capitalize }}">
+                    </div>
+                    <div>
+                        <label for="last-name" class="form-label">Last Name:</label>
+                        <input type="text" id="last-name" name="last-name" class="form-control" value="{{ user.last_name.capitalize }}">
+                    </div>
+                    <div>
+                        <label for="email" class="form-label">Email ID:</label>
+                        <input type="email" id="email" name="email" class="form-control" value="{{ user.email }}">
+                    </div>
+                </form>
+            </div>
+            
+            <div id="books-donated" class="content-section" style="display: none;">
+                <div class="book-card-container">
+                    {% for book in book_donations %}
+                    <div class="book-card">
+                        <div class="card-img-top">
+                            <img src="{{ book.images.url }}" alt="{{ book.title }}">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <div class="card-text">
+                                <p class="card-author"><span class="author">by </span>Author: {{ book.author }} | {{ book.donated_date|date:"j F, Y" }}</p>
+                                <p class="card-year">{{ book.grade_year }}</p>
+                                <p class="card-condition">Condition: {{ book.condition.capitalize }}</p>
+                                <p class="card-price">{% if item.price == 0 %} 
+                                                        Free
+                                                    {% else %}
+                                                        Price: {{ item.price }}
+                                                    {% endif %}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>              
+            <div id="material-donated" class="content-section" style="display: none;">
+                <div class="book-card-container">
+                    {% for item in material_donations %}
+                    <div class="book-card">
+                        <div class="card-img-top">
+                            <img src="{{ item.images.url }}" alt="{{ item.name }}">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name.capitalize }}</h5>
+                            <div class="card-text">
+                                <p class="card-author"><span class="author">by </span>{% if item.company != None %} 
+                                                                Company: {{ item.company }} 
+                                                        {% else %}
+                                                                Company: Generic
+                                                        {% endif %} | {{ item.donated_date|date:"j F, Y" }}</p>
+                                <p class="card-year">{% if item.age_group == 'group1' %}
+                                                        Age: 4 - 8 yrs
+                                                    {% elif item.age_group == 'group2' %}
+                                                        Age: 9 - 12 yrs
+                                                    {% elif item.age_group == 'group3' %}
+                                                        Age: 13 - 15 yrs
+                                                    {% elif item.age_group == 'group4' %}
+                                                        Age: 16 - 18 yrs
+                                                    {% elif item.age_group == 'group5' %}
+                                                        Age: 19 - 23 yrs
+                                                    {% endif %}</p>
+                                <p class="card-condition">Condition: {{ item.condition.capitalize }}</p>
+                                <p class="card-price">{% if item.price == 0 %} 
+                                                        Free
+                                                      {% else %}
+                                                        Price: {{ item.price }}
+                                                       {% endif %}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        const csrf_token = "{{ csrf_token }}";
+    </script>    
+    <script src="{% static 'js/profile.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

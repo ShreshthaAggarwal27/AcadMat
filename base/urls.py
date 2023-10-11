@@ -13,6 +13,7 @@ urlpatterns = [
     path('activate/<uidb64>/<token>', views.activate, name="activate"),
 
     path('profile/<str:username>/', views.user_profile, name='profile'),
+    path('update_profile/', views.update_profile, name='update_profile'),
 
     path('donate_book/', views.donate_book, name='donate_book'),
     path('donate_material/', views.donate_material, name='donate_material'),
