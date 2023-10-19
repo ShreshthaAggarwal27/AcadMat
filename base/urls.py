@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -11,6 +11,8 @@ urlpatterns = [
     path('logout/', views.logout_page, name="logout"),
     path('signup/', views.signup, name="signup"),
     path('activate/<uidb64>/<token>', views.activate, name="activate"),
+    path('social-auth/', include('social_django.urls', namespace = 'social')),
+    
 
     path('profile/<str:username>/', views.user_profile, name='profile'),
     path('update_profile/', views.update_profile, name='update_profile'),

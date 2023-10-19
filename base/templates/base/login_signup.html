@@ -54,7 +54,7 @@
                 <span>OR</span>
                 <hr>
             </div>
-            <a href="#" class="social-button">
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="social-button">
             <img src="{% static 'images/google.png' %}" alt="Google Logo" class="social-logo">
                 Continue with Google
             </a>
@@ -117,7 +117,7 @@
                 <span>OR</span>
                 <hr>
             </div>
-            <a href="#" class="social-button">
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="social-button">
                 <img src="{% static 'images/google.png' %}" alt="Google Logo" class="social-logo">
                     Continue with Google
             </a>
