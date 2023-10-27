@@ -1,0 +1,72 @@
+body{
+    margin-top: 50%;
+}
+.book-cards{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    margin-left: 0;
+    grid-gap: 20px; /* Add spacing between book cards */
+}
+.book-card {
+    width: 350px;
+    height: auto;
+    max-height: 430px;
+    padding: 10px;
+    margin: 5px;
+    position: relative; 
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    border-color: black;
+    border: 1px solid #ddd;
+}
+.book-card:hover{
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1; 
+}
+   
+.book-card .card-img-top{
+    width: 330px;
+    height: 175px;
+    margin: 0;
+}
+.book-card img {
+    width: 100%;
+    height: 175px;
+    object-fit:scale-down;
+}
+
+.book-card .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+}
+
+.book-card .card-text {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.book-card .card-author {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #555;
+}
+
+.book-card .card-year {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #555;
+}
+
+.book-card .card-price {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #00a000;
+    font-weight: bold;
+}

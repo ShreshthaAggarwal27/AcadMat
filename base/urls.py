@@ -24,6 +24,8 @@ urlpatterns = [
     path('priced_books/', views.priced_books, name='priced_books'),
     path('free_material/', views.free_material, name='free_material'),
     path('priced_material/', views.priced_material, name='priced_material'),
+
+    path('search/', views.search_products, name='search_products'),
 ]
 
 if settings.DEBUG:

@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from AcadMat import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.postgres.search import SearchVector
 from django.core.mail import EmailMessage, send_mail
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -12,8 +13,7 @@ from django.utils.encoding import force_str, force_bytes
 from django.contrib.auth import authenticate, login, logout
 from .tokens import generate_token
 from .models import Book, Institution, BookCategory, Material, MaterialCategory
-from .forms import BookDonationForm, BookCategoryForm, MaterialDonationForm, MaterialCategoryForm
-import logging
+from .forms import BookDonationForm, BookCategoryForm, MaterialDonationForm, MaterialCategoryForm, ProductSearchForm
 
 @login_required(login_url='login')
 def donate_book(request):
@@ -62,21 +62,6 @@ def donate_material(request):
 
     context = {'form': form, 'category_form': category_form}
     return render(request, 'base/give_away_material.html', context)
-
-
-# @login_required(login_url='login')
-# def donate_to_institution(request):
-#     if request.method == 'POST':
-#         form = DonationForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             book = form.save(commit=False)
-#             book.donor = request.user
-#             book.save()
-#             return redirect('home')  # Redirect to the home page or a success page
-#     else:
-#         form = DonationForm()
-#     context = {'form': form}
-#     return render(request, 'base/donate_to_institution.html', context)
 
 
 def user_profile(request, username):
@@ -209,6 +194,45 @@ def priced_material(request):
 
     context = {'material': material, 'categories': categories, 'unique_conditions': unique_conditions}
     return render(request, 'base/priced_material.html', context)
+
+
+def search_products(request):
+    products = []
+
+    if request.method == 'GET':
+        query = request.GET.get('query')
+
+        if query:
+
+            if query == 'books' or query == 'Books' or query == 'BOOKS':
+                books = Book.objects.all()
+                for book in books:
+                     products.append({'name': book.title, 'price': book.price, 'category': book.category.name, 'condition': book.condition, 'images': book.images.url})
+
+            else:
+                book_results = Book.objects.filter(title__icontains=query)
+                book_results |= Book.objects.filter(author__icontains=query)
+                book_results |= Book.objects.filter(publication__icontains=query)
+                book_results |= Book.objects.filter(description__icontains=query)
+                book_results |= Book.objects.filter(price__icontains=query)
+                book_results |= Book.objects.filter(condition__icontains=query)
+                book_results |= Book.objects.filter(category__name__icontains=query)
+
+
+                material_results = Material.objects.filter(name__icontains=query)
+                material_results |= Material.objects.filter(company__icontains=query)
+                material_results |= Material.objects.filter(description__icontains=query)
+                material_results |= Material.objects.filter(price__icontains=query)
+                material_results |= Material.objects.filter(condition__icontains=query)
+                material_results |= Material.objects.filter(category__name__icontains=query)
+                
+
+                for book in book_results:
+                    products.append({'name': book.title, 'price': book.price, 'category': book.category.name, 'condition': book.condition, 'images': book.images.url})
+                for material in material_results:
+                    products.append({'name': material.name, 'price': material.price, 'category': material.category.name, 'condition': material.condition, 'images': material.images.url})
+
+    return render(request, 'base/search.html', {'products': products})
 
 
 def signup(request):
