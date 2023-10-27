@@ -65,64 +65,72 @@
             
             <div id="books-donated" class="content-section" style="display: none;">
                 <div class="book-card-container">
-                    {% for book in book_donations %}
-                    <div class="book-card">
-                        <div class="card-img-top">
-                            <img src="{{ book.images.url }}" alt="{{ book.title }}">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ book.title }}</h5>
-                            <div class="card-text">
-                                <p class="card-author"><span class="author">by </span>Author: {{ book.author }} | {{ book.donated_date|date:"j F, Y" }}</p>
-                                <p class="card-year">{{ book.grade_year }}</p>
-                                <p class="card-condition">Condition: {{ book.condition.capitalize }}</p>
-                                <p class="card-price">{% if item.price == 0 %} 
-                                                        Free
-                                                    {% else %}
-                                                        Price: {{ item.price }}
-                                                    {% endif %}</p>
+                    {% if book_donations_count != 0%}
+                        {% for book in book_donations %}
+                        <div class="book-card">
+                            <div class="card-img-top">
+                                <img src="{{ book.images.url }}" alt="{{ book.title }}">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ book.title }}</h5>
+                                <div class="card-text">
+                                    <p class="card-author"><span class="author">by </span>Author: {{ book.author }} | {{ book.donated_date|date:"j F, Y" }}</p>
+                                    <p class="card-year">{{ book.grade_year }}</p>
+                                    <p class="card-condition">Condition: {{ book.condition.capitalize }}</p>
+                                    <p class="card-price">{% if item.price == 0 %} 
+                                                            Free
+                                                        {% else %}
+                                                            Price: {{ item.price }}
+                                                        {% endif %}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <p>No Books Donated yet!</p>
+                    {% endif %}
                 </div>
             </div>              
             <div id="material-donated" class="content-section" style="display: none;">
                 <div class="book-card-container">
-                    {% for item in material_donations %}
-                    <div class="book-card">
-                        <div class="card-img-top">
-                            <img src="{{ item.images.url }}" alt="{{ item.name }}">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ item.name.capitalize }}</h5>
-                            <div class="card-text">
-                                <p class="card-author"><span class="author">by </span>{% if item.company != None %} 
-                                                                Company: {{ item.company }} 
+                    {% if material_donations_count != 0 %}
+                        {% for item in material_donations %}
+                        <div class="book-card">
+                            <div class="card-img-top">
+                                <img src="{{ item.images.url }}" alt="{{ item.name }}">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ item.name.capitalize }}</h5>
+                                <div class="card-text">
+                                    <p class="card-author"><span class="author">by </span>{% if item.company != None %} 
+                                                                    Company: {{ item.company }} 
+                                                            {% else %}
+                                                                    Company: Generic
+                                                            {% endif %} | {{ item.donated_date|date:"j F, Y" }}</p>
+                                    <p class="card-year">{% if item.age_group == 'group1' %}
+                                                            Age: 4 - 8 yrs
+                                                        {% elif item.age_group == 'group2' %}
+                                                            Age: 9 - 12 yrs
+                                                        {% elif item.age_group == 'group3' %}
+                                                            Age: 13 - 15 yrs
+                                                        {% elif item.age_group == 'group4' %}
+                                                            Age: 16 - 18 yrs
+                                                        {% elif item.age_group == 'group5' %}
+                                                            Age: 19 - 23 yrs
+                                                        {% endif %}</p>
+                                    <p class="card-condition">Condition: {{ item.condition.capitalize }}</p>
+                                    <p class="card-price">{% if item.price == 0 %} 
+                                                            Free
                                                         {% else %}
-                                                                Company: Generic
-                                                        {% endif %} | {{ item.donated_date|date:"j F, Y" }}</p>
-                                <p class="card-year">{% if item.age_group == 'group1' %}
-                                                        Age: 4 - 8 yrs
-                                                    {% elif item.age_group == 'group2' %}
-                                                        Age: 9 - 12 yrs
-                                                    {% elif item.age_group == 'group3' %}
-                                                        Age: 13 - 15 yrs
-                                                    {% elif item.age_group == 'group4' %}
-                                                        Age: 16 - 18 yrs
-                                                    {% elif item.age_group == 'group5' %}
-                                                        Age: 19 - 23 yrs
-                                                    {% endif %}</p>
-                                <p class="card-condition">Condition: {{ item.condition.capitalize }}</p>
-                                <p class="card-price">{% if item.price == 0 %} 
-                                                        Free
-                                                      {% else %}
-                                                        Price: {{ item.price }}
-                                                       {% endif %}</p>
+                                                            Price: {{ item.price }}
+                                                        {% endif %}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <p>No Material donted yet!</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
