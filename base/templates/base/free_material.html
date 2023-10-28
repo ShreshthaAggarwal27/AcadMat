@@ -129,34 +129,36 @@
         <div class="book-cards">
             {% for item in material %}
             {% if item.price == 0 %}
-            <div class="book-card" data-category="{{ book.category.name }}">
-                <div  class="card-img-top">
-                    <img src="{{ item.images.url }}" alt="{{ item.name }}">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ item.name.capitalize }}</h5>
-                    <div class="card-text">
-                        <p class="card-author"><span class="author">by </span>{% if item.company != None %} 
-                                                                                    Company: {{ item.company }} 
-                                                                              {% else %}
-                                                                                    Company: Generic
-                                                                              {% endif %} | {{ item.donated_date|date:"j F, Y" }}</p>
-                        <p class="card-year">{% if item.age_group == 'group1' %}
-                                                Age: 4 - 8 yrs
-                                            {% elif item.age_group == 'group2' %}
-                                                Age: 9 - 12 yrs
-                                            {% elif item.age_group == 'group3' %}
-                                                Age: 13 - 15 yrs
-                                            {% elif item.age_group == 'group4' %}
-                                                Age: 16 - 18 yrs
-                                            {% elif item.age_group == 'group5' %}
-                                                Age: 19 - 23 yrs
-                                            {% endif %}</p>
-                        <p class="card-condition">Condition: {{ item.condition.capitalize }}</p>
-                        <p class="card-price">Free</p>
+            <a href="{% url 'material_detail' material_id=item.id %}">
+                <div class="book-card" data-category="{{ book.category.name }}">
+                    <div  class="card-img-top">
+                        <img src="{{ item.images.url }}" alt="{{ item.name }}">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name.capitalize }}</h5>
+                        <div class="card-text">
+                            <p class="card-author"><span class="author">by </span>{% if item.company != None %} 
+                                                                                        Company: {{ item.company }} 
+                                                                                {% else %}
+                                                                                        Company: Generic
+                                                                                {% endif %} | {{ item.donated_date|date:"j F, Y" }}</p>
+                            <p class="card-year">{% if item.age_group == 'group1' %}
+                                                    Age: 4 - 8 yrs
+                                                {% elif item.age_group == 'group2' %}
+                                                    Age: 9 - 12 yrs
+                                                {% elif item.age_group == 'group3' %}
+                                                    Age: 13 - 15 yrs
+                                                {% elif item.age_group == 'group4' %}
+                                                    Age: 16 - 18 yrs
+                                                {% elif item.age_group == 'group5' %}
+                                                    Age: 19 - 23 yrs
+                                                {% endif %}</p>
+                            <p class="card-condition">Condition: {{ item.condition.capitalize }}</p>
+                            <p class="card-price">Free</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
             {% endif %}
             {% endfor %}
         </div>

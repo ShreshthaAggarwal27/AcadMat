@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render, redirect  
+from django.shortcuts import get_object_or_404, render, redirect  
 from django.contrib import messages
 from django.contrib.auth.models import User
 from AcadMat import settings
@@ -233,6 +233,14 @@ def search_products(request):
                     products.append({'name': material.name, 'price': material.price, 'category': material.category.name, 'condition': material.condition, 'images': material.images.url})
 
     return render(request, 'base/search.html', {'products': products})
+
+def book_detail(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    return render(request, 'base/book_detail.html', {'book': book})
+
+def material_detail(request, material_id):
+    material = get_object_or_404(Material, pk=material_id)
+    return render(request, 'base/material_detail.html', {'material': material})
 
 
 def signup(request):

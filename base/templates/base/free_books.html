@@ -8,19 +8,6 @@
 </head>
 <body style="background-color: rgb(243, 247, 255); padding-top: 5rem;">
     {% include 'navbar.html' %}
-    <!-- <div class="sorting-and-filtering">
-        <br>
-        <form method="get">
-            <label for="sort_by">Sort by:</label>
-            <select name="sort_by" id="sort_by">
-                <option value="title">Title</option>
-                <option value="author">Author</option> -->
-                <!-- Add more sorting options here -->
-            <!-- </select>
-            <button class="btn btn-outline-primary" type="submit">Sort</button>
-        </form>
-    </div> -->
-
     <div class="home-container">
         <div class="sorting-and-filtering">
             <div class="categories-filtering">
@@ -125,20 +112,22 @@
         <div class="book-cards">
             {% for book in books %}
             {% if book.price == 0 %}
-            <div class="book-card">
-                <div  class="card-img-top">
-                    <img src="{{ book.images.url }}" alt="{{ book.title }}">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ book.title }}</h5>
-                    <div class="card-text">
-                        <p class="card-author"><span class="author">by </span>Author: {{ book.author }} | {{ book.donated_date|date:"j F, Y" }}</p>
-                        <p class="card-year">{{ book.grade_year }}</p>
-                        <p class="card-condition">Condition: {{ book.condition.capitalize }}</p>
-                        <p class="card-price">Free</p>
+            <a href = "{% url 'book_detail' book_id=book.id %}">
+                <div class="book-card">
+                    <div  class="card-img-top">
+                        <img src="{{ book.images.url }}" alt="{{ book.title }}">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <div class="card-text">
+                            <p class="card-author"><span class="author">by </span>Author: {{ book.author }} | {{ book.donated_date|date:"j F, Y" }}</p>
+                            <p class="card-year">{{ book.grade_year }}</p>
+                            <p class="card-condition">Condition: {{ book.condition.capitalize }}</p>
+                            <p class="card-price">Free</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
             {% endif %}
             {% endfor %}
         </div>

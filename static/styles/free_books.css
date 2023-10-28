@@ -84,11 +84,18 @@ body {
     border-color: black;
     border: 1px solid #ddd;
 }
+.book-cards a{
+    text-decoration: none;
+}
+.book-cards a:hover{
+    text-decoration: none;
+}
 .book-card:hover{
     transform: scale(1.05);
     transition: transform 0.2s ease-in-out; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1; 
+    text-decoration: none;
 }
    
 .book-card .card-img-top{

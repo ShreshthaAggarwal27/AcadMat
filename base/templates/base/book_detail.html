@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'styles/product_detail.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <title>{{ book.title }}</title>
+</head>
+<body style="padding-top: 5rem;">
+    {% include 'navbar.html' %}
+    <div class="product-detail">
+        <div class="product-image">
+            <img src="{{ book.images.url }}" alt="{{ book.title }}"/>
+            <a class="btn btn-warning" href="#">Chat Now!</a>
+        </div>
+        <div class="product-text">
+            <h1 class="product-title">{{ book.title }}</h1>
+            <p class="product-author">Author: {{ book.author }}</p>
+            <p class="product-publication">Publication: {{ book.publication }}</p>
+            {% if book.price == 0 %}
+                <p class="card-price">Free</p>
+            {% else %}
+                <p class="card-price">Price: ₹{{ book.price }}</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

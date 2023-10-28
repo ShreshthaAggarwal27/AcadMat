@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'styles/product_detail.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <title>{{ material.name }}</title>
+</head>
+<body style="padding-top: 5rem;">
+    {% include 'navbar.html' %}
+    <div class="product-detail">
+        <div class="product-image">
+            <img src="{{ material.images.url }}" alt="{{ material.name }}"/>
+            <a class="btn btn-warning" href="#">Chat Now!</a>
+        </div>
+        <div class="product-text">
+            <h1 class="product-title">{{ material.name }}</h1>
+            <p class="product-author">Company: {{ material.company }}</p>
+            {% if material.price == 0 %}
+                <p class="card-price">Free</p>
+            {% else %}
+                <p class="card-price">Price: ₹{{ material.price }}</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

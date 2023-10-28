@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-    <title>Free Books</title>
+    <title>Priced Books</title>
     <link rel="stylesheet" href="{% static 'styles/free_books.css' %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
 </head>
@@ -125,20 +125,22 @@
         <div class="book-cards">
             {% for book in books %}
             {% if book.price != 0 %}
-            <div class="book-card">
-                <div  class="card-img-top">
-                    <img src="{{ book.images.url }}" alt="{{ book.title }}">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ book.title }}</h5>
-                    <div class="card-text">
-                        <p class="card-author"><span class="author">by </span>Author: {{ book.author }} | {{ book.donated_date|date:"j F, Y" }}</p>
-                        <p class="card-year">{{ book.grade_year }}</p>
-                        <p class="card-condition">Condition: {{ book.condition.capitalize }}</p>
-                        <p class="card-price">Price: ₹{{ book.price }}</p>
+            <a href = "{% url 'book_detail' book_id=book.id %}">
+                <div class="book-card">
+                    <div  class="card-img-top">
+                        <img src="{{ book.images.url }}" alt="{{ book.title }}">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <div class="card-text">
+                            <p class="card-author"><span class="author">by </span>Author: {{ book.author }} | {{ book.donated_date|date:"j F, Y" }}</p>
+                            <p class="card-year">{{ book.grade_year }}</p>
+                            <p class="card-condition">Condition: {{ book.condition.capitalize }}</p>
+                            <p class="card-price">Price: ₹{{ book.price }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
             {% endif %}
             {% endfor %}
         </div>

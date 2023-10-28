@@ -26,6 +26,9 @@ urlpatterns = [
     path('priced_material/', views.priced_material, name='priced_material'),
 
     path('search/', views.search_products, name='search_products'),
+    path('book_detail/<int:book_id>/', views.book_detail, name='book_detail'),
+    path('material_detail/<int:material_id>/', views.material_detail, name='material_detail'),
+    
 ]
 
 if settings.DEBUG:
