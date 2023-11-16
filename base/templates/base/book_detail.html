@@ -12,8 +12,12 @@
     <div class="product-detail">
         <div class="product-image">
             <img src="{{ book.images.url }}" alt="{{ book.title }}"/>
-            <a class="btn btn-warning" href="#">Chat Now!</a>
-        </div>
+            {% if book.donor and book.donor.username != user.username %}
+                <a class="btn btn-warning" href="{% url 'chat' owner_name=book.donor.username %}">Chat Now!</a>
+            {% else %}
+                <a class="btn btn-warning" href="#">Chat Unavailable</a>
+            {% endif %}
+            </div>
         <div class="product-text">
             <h1 class="product-title">{{ book.title }}</h1>
             <p class="product-author">Author: {{ book.author }}</p>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'styles/receiver_chat.css' %}">
+</head>
+<body style="padding-top: 5%; background-color: rgb(0, 119, 255);">
+    {% include 'navbar.html' %}
+
+    <div class="home-container">
+      <div class="senders">
+        <div class="sender-heading">
+          <h2>Chats</h2>
+        </div>
+        {% for sender in senders %}
+        <div class="sender">
+          <a href = "{% url 'receiver_chat' sender.username %}" ><h5>{{ sender.first_name }}</h5></a>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="chats">
+        <div class="chat-header">
+            <h2>{{ sender_profile.first_name }}</h2>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            {% for chat in chats %}
+            {% if chat.msg_sender == sender_profile and chat.msg_receiver == receiver_profile %}
+            <div class="chat-box-sent">
+                {{ chat }}
+            </div>
+            {% elif chat.msg_sender == receiver_profile and chat.msg_receiver == sender_profile %}
+            <div class="chat-box-received">
+                {{chat}}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="chat-form">
+            <form id="chat-form" method="POST" action="">
+                {% csrf_token %}
+                {{ form.body }}
+                <br>
+                <button class = "btn btn-primary" type="submit">Send</button>
+            </form>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

@@ -11,6 +11,8 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_str, force_bytes
 from django.contrib.auth import authenticate, login, logout
+from chat import *
+from chat.forms import ChatMessageForm
 from .tokens import generate_token
 from .models import Book, Institution, BookCategory, Material, MaterialCategory
 from .forms import BookDonationForm, BookCategoryForm, MaterialDonationForm, MaterialCategoryForm, ProductSearchForm
@@ -236,12 +238,13 @@ def search_products(request):
 
 def book_detail(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
-    return render(request, 'base/book_detail.html', {'book': book})
+    user = request.user
+    return render(request, 'base/book_detail.html', {'book': book, 'user': user})
 
 def material_detail(request, material_id):
     material = get_object_or_404(Material, pk=material_id)
-    return render(request, 'base/material_detail.html', {'material': material})
-
+    user = request.user
+    return render(request, 'base/material_detail.html', {'material': material, 'user': user})
 
 def signup(request):
     page = 'register'

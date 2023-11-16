@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'styles/all_chats.css' %}">
+</head>
+<body style="padding-top: 5%; background-color: rgb(0, 119, 255);">
+    {% include 'navbar.html' %}
+
+    <div class="home-container">
+      <div class="senders">
+        <div class="sender-heading">
+          <h2>Chats</h2>
+        </div>
+        {% for sender in senders %}
+        <div class="sender">
+          <a href = "{% url 'receiver_chat' sender.username %}" ><h5>{{ sender.first_name }}</h5></a>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="chats">
+        <h5> Chats will be shown here!</h5>
+      </div>
+    </div>
+</body>
+</html>

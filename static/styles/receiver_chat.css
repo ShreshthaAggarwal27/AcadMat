@@ -1,0 +1,110 @@
+body {
+    /* background-color: rgb(0, 119, 255); */
+    background-color: rgb(0, 119, 255);
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
+}
+
+
+/* Style the home container */
+.home-container {
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+}
+
+/* Style the senders container */
+.senders {
+    flex: 1.5;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+.sender{
+    height:40px;
+    border: 0.5px solid rgb(179, 179, 179);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;;
+}
+
+/* Style the chat container */
+.chats {
+    flex: 2.5;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+/* Style the sender heading */
+.sender-heading {
+    margin-bottom: 10px;
+}
+
+/* Style the sender list */
+.senders h5 {
+    margin: 0;
+}
+
+/* Style the chat container */
+.chats {
+    margin: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: stretch; /* Stretch children horizontally */
+    justify-content: flex-start; /* Align children at the top */
+    height: 80vh;
+    width: 100%; /* Take full width of the parent */
+    box-sizing: border-box;
+}
+
+/* Style the chat header */
+.chat-header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Style the chat messages */
+.chat-messages {
+    flex-grow: 1; /* Allow messages to grow and take available space */
+    overflow-y: auto; /* Add a vertical scrollbar if messages overflow */
+}
+
+/* Style the chat box */
+.chat-box-sent {
+    border-radius: 5px;
+    background-color: #128c7e;
+    color: white;
+    margin: 5px; /* Add spacing between sent messages */
+    padding: 5px;
+    width: max-content;
+    max-width: 60%;
+    display: block;
+    margin-left: auto; /* Align to the right */
+}
+
+.chat-box-received{
+    border-radius: 5px;
+    background-color: #004239;
+    color: white;
+    margin: 5px; /* Add spacing between sent messages */
+    padding: 5px;
+    max-width: 60%;
+    width: max-content;
+    display: block;
+}
+

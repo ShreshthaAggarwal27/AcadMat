@@ -55,9 +55,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'base.apps.BaseConfig',
     'social_django',
+    'channels',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -93,6 +94,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'AcadMat.wsgi.application'
+
+ASGI_APPLICATION = 'AcadMat.routing.application'
 
 
 # Database
