@@ -13,7 +13,7 @@ ACADMAT is a web platform aimed at fostering resource sharing within the educati
 ## Tech Stack
 - Front-end: HTML, CSS, JavaScript
 - Back-end: Python, Django
-- Real-time Communication: Socket.io
+- Real-time Communication: Django
 - Database: SQL
 
 
