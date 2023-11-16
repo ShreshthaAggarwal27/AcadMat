@@ -8,7 +8,7 @@ ACADMAT is a web platform aimed at fostering resource sharing within the educati
 ## Project Features
 - **Resource Listing:** Users can list their surplus academic resources for donation or selling at a lower price.
 - **Resource Search:** Students in need can search for and request the resources they require.
-- **Real-time Communication:** Utilizing Socket.io, our platform enables real-time communication between donors and recipients.
+- **Real-time Communication:** Utilizing Django MVT structure, our platform enables real-time communication between donors and recipients.
 
 ## Tech Stack
 - Front-end: HTML, CSS, JavaScript
