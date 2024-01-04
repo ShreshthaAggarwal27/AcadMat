@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 from .info import *
 from django.contrib.messages import constants as messages
@@ -43,7 +43,8 @@ SECRET_KEY = 'django-insecure-74#z9jl=4^!1ps09d5-6+5k-s*i5yyi5f9hy1lha$pz2qn&npn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app']
+
 
 
 # Application definition
